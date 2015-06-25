@@ -75,41 +75,5 @@ end
 
 get '/description.xml' do
   content_type 'text/xml'
-  "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
-  <root xmlns=\"urn:schemas-upnp-org:device-1-0\">
-  <specVersion>
-  <major>1</major>
-  <minor>0</minor>
-  </specVersion>
-  <URLBase>http://#{settings.bind}:#{settings.port}/</URLBase>
-  <device>
-  <deviceType>urn:schemas-upnp-org:device:Basic:1</deviceType>
-  <friendlyName>Philips hue (#{settings.bind})</friendlyName>
-  <manufacturer>Royal Philips Electronics</manufacturer>
-  <manufacturerURL>http://www.philips.com</manufacturerURL>
-  <modelDescription>Philips hue Personal Wireless Lighting</modelDescription>
-  <modelName>Philips hue bridge 2012</modelName>
-  <modelNumber>929000226503</modelNumber>
-  <modelURL>http://www.meethue.com</modelURL>
-  <serialNumber>001788108c1c</serialNumber>
-  <UDN>uuid:#{server.uuid}</UDN>
-  <presentationURL>index.html</presentationURL>
-  <iconList>
-  <icon>
-  <mimetype>image/png</mimetype>
-  <height>48</height>
-  <width>48</width>
-  <depth>24</depth>
-  <url>hue_logo_0.png</url>
-  </icon>
-  <icon>
-  <mimetype>image/png</mimetype>
-  <height>120</height>
-  <width>120</width>
-  <depth>24</depth>
-  <url>hue_logo_3.png</url>
-  </icon>
-  </iconList>
-  </device>
-  </root>"
+  erb :description, :locals => { :addr => settings.bind, :port => settings.port, :udn => server.uuid }
 end
