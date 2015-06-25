@@ -1,0 +1,13 @@
+---
+host: "10.0.1.59"
+port: 1900
+devices:
+    -
+        name: "Pantry"
+        on_url: "http://on url"
+        off_url: "http://off url"
+    -
+        name: "Deck"
+        on_url: "http://on url"
+        off_url: "http://off url"
+        
