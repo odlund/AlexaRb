@@ -12,4 +12,13 @@ devices:
         on_url: "http://10.0.1.101:8080/CMD?Switch_Back_Deck=ON"
         off_url: "http://10.0.1.101:8080/CMD?Switch_Back_Deck=OFF"
         state_url: "http://10.0.1.101:8080/rest/items/Switch_Back_Deck/state"
-        
+    3:
+        name: "Fire TV"
+        on_url: "http://10.0.1.101:8080/CMD?Harmony_WatchFireTV=ON"
+        off_url: "http://10.0.1.101:8080/CMD?Harmony_PowerOff=ON"
+        state_url: "http://10.0.1.101:8080/rest/items/Harmony_WatchFireTV/state"
+    4:
+        name: "Apple TV"
+        on_url: "http://10.0.1.101:8080/CMD?Harmony_WatchAppleTV=ON"
+        off_url: "http://10.0.1.101:8080/CMD?Harmony_PowerOff=ON"
+        state_url: "http://10.0.1.101:8080/rest/items/Harmony_WatchAppleTV/state"
