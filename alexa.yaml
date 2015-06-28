@@ -22,3 +22,9 @@ devices:
         on_url: "http://10.0.1.101:8080/CMD?Harmony_WatchAppleTV=ON"
         off_url: "http://10.0.1.101:8080/CMD?Harmony_PowerOff=ON"
         state_url: "http://10.0.1.101:8080/rest/items/Harmony_WatchAppleTV/state"
+    5:
+        name: "Movie Lights"
+        put_url: "http://10.0.1.50/api/17AvM45CJ2TJO4dM4NelSeInGmwVRns4UyG6Vl2s/groups/0/action"
+        on_data: "{\"scene\": \"5375fcdb3-on-0\"}"
+        off_data: ""
+

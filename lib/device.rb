@@ -5,9 +5,15 @@ class Device
   def initialize(id, values)
     @id = id
     @name = values["name"]
-    @onUrl = URI(values["on_url"])
-    @offUrl = URI(values["off_url"])
-    @stateUrl = URI(values["state_url"])
+
+    if (values["on_url"])
+        @onUrl = URI(values["on_url"])
+        @offUrl = URI(values["off_url"])
+    elsif (values["put_url"]) 
+        @putUrl = URI(values["put_url"])
+        @onData = values["on_data"]
+        @offData = values["off_data"]
+    end
   end
   
   def to_json(*a)
@@ -24,15 +30,15 @@ class Device
   
   def set_state(on)
     @state = on
-    if on
-      Net::HTTP.get(@onUrl)
+    unless @onUrl.nil?
+      if on
+        Net::HTTP.get(@onUrl)
+      else
+        Net::HTTP.get(@offUrl)
+      end
     else
-      Net::HTTP.get(@offUrl)
+      req = Net::HTTP::Put.new(@putUrl)
+      req.body = on ? @onData : @offData
     end
   end
-  
-  def get_state()
-    @state = (Net::HTTP.get(@stateUrl) == "ON")
-  end
-  
 end

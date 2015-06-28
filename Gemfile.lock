@@ -17,6 +17,3 @@ PLATFORMS
 DEPENDENCIES
   sinatra
   ssdp
-
-BUNDLED WITH
-   1.10.5
