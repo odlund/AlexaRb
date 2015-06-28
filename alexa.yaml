@@ -32,4 +32,8 @@ devices:
         type: "hue_scene"
         group: "0"
         scene: "5375fcdb3-on-0"
-
+    6:
+        name: "Work Lights"
+        type: "hue_scene"
+        group: "0"
+        scene: "ef6c2ab27-on-0"
