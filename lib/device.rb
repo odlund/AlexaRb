@@ -2,20 +2,29 @@ require 'net/http'
 require 'json'
 
 class Device
-  def initialize(id, values)
-    @id = id
-    @name = values["name"]
+  DEVICES = {}
+  @options = {}
 
-    if (values["on_url"])
-        @onUrl = URI(values["on_url"])
-        @offUrl = URI(values["off_url"])
-    elsif (values["put_url"]) 
-        @putUrl = URI(values["put_url"])
-        @onData = values["on_data"]
-        @offData = values["off_data"]
+  class << self
+    attr_accessor :options
+  end
+
+  def self.register_device name
+    DEVICES[name] = self
+  end
+
+  def self.create (data)
+    device_class = DEVICES[data['type']]
+    if device_class
+      device_class.new data
     end
   end
-  
+
+  def initialize(data)
+    @name = data["name"]
+    @state = false
+  end
+
   def to_json(*a)
     {
       "manufacturername" => "Philips",
@@ -27,18 +36,47 @@ class Device
       "type" => "Dimmable Light"
     }.to_json(*a)
   end
-  
-  def set_state(on)
-    @state = on
-    unless @onUrl.nil?
-      if on
-        Net::HTTP.get(@onUrl)
-      else
-        Net::HTTP.get(@offUrl)
-      end
-    else
-      req = Net::HTTP::Put.new(@putUrl)
-      req.body = on ? @onData : @offData
+
+  def set_state(state)
+    @state = state
+  end
+end
+
+class OpenHABDevice < Device
+  register_device "openhab"
+
+  def initialize(data)
+    super data
+    @key = data['key']
+    @http = Net::HTTP.new(Device.options['openhab']['host'], Device.options['openhab']['port'])
+  end
+
+  def set_state(state)
+    super state
+    request = Net::HTTP::Get.new("/CMD?#{@key}=#{state ? "ON" : "OFF"}")
+    puts request
+    @http.request(request)
+  end
+end
+
+class HueScene < Device
+  register_device "hue_scene"
+
+  def initialize(data)
+    super data
+    @group = data['group']
+    @scene = data['scene']
+    @appid = Device.options['hue']['appid']
+    @http = Net::HTTP.new(Device.options['hue']['host'])
+  end
+
+  def set_state(state)
+    super state
+    if state
+      req = Net::HTTP::Put.new("/api/#{@appid}/groups/#{@group}/action")
+      req.body = { "scene" => @scene }.to_json
+      resp = @http.request(req)
+      puts resp
     end
   end
 end

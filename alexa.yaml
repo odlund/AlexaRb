@@ -1,30 +1,35 @@
 # Generate a uuid to use for your own instance and put it here
 uuid: "72B84F3C-A2F9-4139-88FE-592DE4444B7E"
 
+device_settings:
+    openhab:
+        host: "10.0.1.101"
+        port: "8080"
+
+    hue:
+        host: "10.0.1.50"
+        appid: "17AvM45CJ2TJO4dM4NelSeInGmwVRns4UyG6Vl2s"
+
 devices:
     1:
         name: "Pantry"
-        on_url: "http://10.0.1.101:8080/CMD?Switch_Pantry=ON"
-        off_url: "http://10.0.1.101:8080/CMD?Switch_Pantry=OFF"
-        state_url: "http://10.0.1.101:8080/rest/items/Switch_Pantry/state"
+        type: "openhab"
+        key: "Switch_Pantry"
     2:
         name: "Deck"
-        on_url: "http://10.0.1.101:8080/CMD?Switch_Back_Deck=ON"
-        off_url: "http://10.0.1.101:8080/CMD?Switch_Back_Deck=OFF"
-        state_url: "http://10.0.1.101:8080/rest/items/Switch_Back_Deck/state"
+        type: "openhab"
+        key: "Switch_Back_Deck"
     3:
         name: "Fire TV"
-        on_url: "http://10.0.1.101:8080/CMD?Harmony_WatchFireTV=ON"
-        off_url: "http://10.0.1.101:8080/CMD?Harmony_PowerOff=ON"
-        state_url: "http://10.0.1.101:8080/rest/items/Harmony_WatchFireTV/state"
+        type: "openhab"
+        key:  "Harmony_WatchFireTV"
     4:
         name: "Apple TV"
-        on_url: "http://10.0.1.101:8080/CMD?Harmony_WatchAppleTV=ON"
-        off_url: "http://10.0.1.101:8080/CMD?Harmony_PowerOff=ON"
-        state_url: "http://10.0.1.101:8080/rest/items/Harmony_WatchAppleTV/state"
+        type: "openhab"
+        key:  "Harmony_WatchAppleTV"
     5:
         name: "Movie Lights"
-        put_url: "http://10.0.1.50/api/17AvM45CJ2TJO4dM4NelSeInGmwVRns4UyG6Vl2s/groups/0/action"
-        on_data: "{\"scene\": \"5375fcdb3-on-0\"}"
-        off_data: ""
+        type: "hue_scene"
+        group: "0"
+        scene: "5375fcdb3-on-0"
 
