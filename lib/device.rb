@@ -54,7 +54,6 @@ class OpenHABDevice < Device
   def set_state(state)
     super state
     request = Net::HTTP::Get.new("/CMD?#{@key}=#{state ? "ON" : "OFF"}")
-    puts request
     @http.request(request)
   end
 end
@@ -76,7 +75,23 @@ class HueScene < Device
       req = Net::HTTP::Put.new("/api/#{@appid}/groups/#{@group}/action")
       req.body = { "scene" => @scene }.to_json
       resp = @http.request(req)
-      puts resp
     end
   end
 end
+
+class DomoticzSwitch < Device
+    register_device "domoticz_switch"
+
+    def initialize(data)
+        super data
+        @idx = data['idx']
+        @http = Net::HTTP.new(Device.options['domoticz']['host'], Device.options['domoticz']['port'])
+    end
+
+    def set_state(state)
+        super state
+        request = Net::HTTP::Get.new("/json.htm?type=command&param=switchlight&idx=#{@idx}&switchcmd=#{state ? "On" : "Off"}")
+        resp = @http.request(request)
+    end
+end
+

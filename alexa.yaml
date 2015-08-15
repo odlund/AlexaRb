@@ -2,6 +2,10 @@
 uuid: "72B84F3C-A2F9-4139-88FE-592DE4444B7E"
 
 device_settings:
+    domoticz:
+        host: "10.0.1.101"
+        port: "8080"
+
     openhab:
         host: "10.0.1.101"
         port: "8080"
@@ -13,20 +17,12 @@ device_settings:
 devices:
     1:
         name: "Pantry"
-        type: "openhab"
-        key: "Switch_Pantry"
+        type: "domoticz_switch"
+        idx: "36"
     2:
         name: "Deck"
-        type: "openhab"
-        key: "Switch_Back_Deck"
-    3:
-        name: "Fire TV"
-        type: "openhab"
-        key:  "Harmony_WatchFireTV"
-    4:
-        name: "Apple TV"
-        type: "openhab"
-        key:  "Harmony_WatchAppleTV"
+        type: "domoticz_switch"
+        idx: "35"
     5:
         name: "Movie Lights"
         type: "hue_scene"
