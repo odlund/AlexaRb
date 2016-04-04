@@ -2,33 +2,17 @@
 uuid: "72B84F3C-A2F9-4139-88FE-592DE4444B7E"
 
 device_settings:
-    domoticz:
-        host: "10.0.1.101"
-        port: "8080"
-
-    openhab:
-        host: "10.0.1.101"
-        port: "8080"
-
     hue:
         host: "10.0.1.50"
         appid: "17AvM45CJ2TJO4dM4NelSeInGmwVRns4UyG6Vl2s"
 
 devices:
     1:
-        name: "Pantry"
-        type: "domoticz_switch"
-        idx: "36"
-    2:
-        name: "Deck"
-        type: "domoticz_switch"
-        idx: "35"
-    5:
         name: "Movie Lights"
         type: "hue_scene"
         group: "0"
         scene: "5375fcdb3-on-0"
-    6:
+    2:
         name: "Work Lights"
         type: "hue_scene"
         group: "0"
